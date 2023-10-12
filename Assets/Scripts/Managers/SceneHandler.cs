@@ -16,6 +16,8 @@ public class SceneHandler : MonoBehaviour
         if (Instance != this)
             Destroy(this);
 
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+            ChangeScene(1);
     }
 
     public void ChangeScene(int index)
@@ -25,6 +27,8 @@ public class SceneHandler : MonoBehaviour
 
     private IEnumerator ChangeSceneRoutine(int index)
     {
+        UiManager.Instance.UpdateLevelText(index - 1);
+
         AsyncOperation operation = SceneManager.LoadSceneAsync(index);
 
         while (operation.isDone == false)

@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class SpawnManager : MonoBehaviour
 {
     [SerializeField] private GameObject _player;
-    private Transform _spawnPoint;
 
     private void Awake()
     {
@@ -16,7 +15,11 @@ public class SpawnManager : MonoBehaviour
 
     private void SpawnPlayer(Scene arg0, LoadSceneMode arg1)
     {
-        _spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").transform;
-        var clone = Instantiate(_player, _spawnPoint.position, Quaternion.identity);
+        var spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint");
+
+        if(spawnPoint != null)
+        {
+            var clone = Instantiate(_player, spawnPoint.transform.position, Quaternion.identity);
+        }
     }
 }
